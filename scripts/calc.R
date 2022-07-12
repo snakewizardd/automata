@@ -21,7 +21,7 @@ result_list <- c()
 
 capture_index <- NULL
 
-for(cycle in 1:5){
+for(cycle in 1:100){
 
 for(row in 1:nrow(grid)){
   
@@ -98,4 +98,4 @@ gganimate_recording <- ggplot(df, aes(x, y, fill = factor(value))) +
   theme(legend.position = 'none') +
   transition_states(as.numeric(df$time), transition_length = 0)
 
-animate(gganimate_recording, nframes = 24, renderer = gifski_renderer("./animations/test1.gif"))
+animate(gganimate_recording, nframes = 24, renderer = gifski_renderer("./animations/test2.gif"))
