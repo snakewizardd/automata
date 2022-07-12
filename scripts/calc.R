@@ -2,26 +2,30 @@ library(dplyr)
 library(ggplot2)
 library(gganimate)
 
-grid <- matrix(0,nrow=8,ncol=8) %>% as.data.frame()
-positions <- c(1,2,3,4,5,6,7,8)
+grid <- matrix(0,nrow=10,ncol=10) %>% as.data.frame()
+positions <- c(1,2,3,4,5,6,7,8,9,10)
 
 colnames(grid) <- positions
 
-input_row <- 4
-input_col <- 4
+input_row <- 5
+input_col <- 5
 
-grid[input_row-1,input_col] <- 1
-grid[input_row,input_col+1] <- 1
-grid[input_row+1,input_col+1] <- 1
+grid[input_row,input_col] <- 1
 grid[input_row+1,input_col] <- 1
-grid[input_row+1,input_col-1] <- 1
+grid[input_row+1,input_col] <- 1
+
+
+grid[input_row-1,input_col+1] <- 1
+grid[input_row-1,input_col-1] <- 1
+
+
 
 #Per SO Feedback
 result_list <- c()
 
 capture_index <- NULL
 
-for(cycle in 1:100){
+for(cycle in 1:72){
 
 for(row in 1:nrow(grid)){
   
@@ -86,7 +90,7 @@ result_list[[cycle]] <- grid
 
 df <- bind_rows(lapply(result_list, function(x) {
   tidyr::pivot_longer(x, everything(), names_to = 'x') %>% 
-    mutate(y = rep(8:1, each = 8))
+    mutate(y = rep(10:1, each = 10))
 }), .id = 'time')
 
 
@@ -98,4 +102,4 @@ gganimate_recording <- ggplot(df, aes(x, y, fill = factor(value))) +
   theme(legend.position = 'none') +
   transition_states(as.numeric(df$time), transition_length = 0)
 
-animate(gganimate_recording, nframes = 24, renderer = gifski_renderer("./animations/test2.gif"))
+animate(gganimate_recording, nframes = 24, renderer = gifski_renderer("./animations/test3.gif"))
