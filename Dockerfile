@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y \
     curl
 
 RUN R -e "install.packages('dplyr', repos ='http://cran.rstudio.com/')"
+RUN R -e "install.packages('ggplot2', repos ='http://cran.rstudio.com/')"
+RUN R -e "install.packages('gganimate', repos ='http://cran.rstudio.com/')"
+RUN R -e "install.packages('gifski', repos ='http://cran.rstudio.com/')"
 
 
 EXPOSE 8787
