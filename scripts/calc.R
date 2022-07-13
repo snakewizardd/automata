@@ -2,8 +2,8 @@ library(dplyr)
 library(ggplot2)
 library(gganimate)
 
-grid <- matrix(0,nrow=10,ncol=12) %>% as.data.frame()
-positions <- c(1,2,3,4,5,6,7,8,9,10,11,12)
+grid <- matrix(0,nrow=12,ncol=10) %>% as.data.frame()
+positions <- c(1,2,3,4,5,6,7,8,9,10)
 
 colnames(grid) <- positions
 
@@ -11,25 +11,11 @@ input_row <- 5
 input_col <- 6
 
 
-grid[input_row-1,input_col-2] <- 1
-
-grid[input_row-1,input_col-1] <- 1
-
-grid[input_row,input_col-1] <- 1
-grid[input_row,input_col] <- 1
+grid[input_row,input_col+1] <- 1
+grid[input_row-1,input_col] <- 1
 grid[input_row+1,input_col] <- 1
+grid[input_row+1,input_col-1] <- 1
 grid[input_row+1,input_col+1] <- 1
-
-
-
-
-
-
-
-
-
-
-
 
 
 
