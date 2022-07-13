@@ -10,11 +10,18 @@ colnames(grid) <- positions
 input_row <- 5
 input_col <- 6
 
-grid[input_row,input_col+1] <- 1
+grid[input_row-1,input_col+2] <- 1
+grid[input_row-1,input_col+1] <- 1
+grid[input_row,input_col-1] <- 1
 grid[input_row,input_col] <- 1
+grid[input_row,input_col+1] <- 1
 grid[input_row+1,input_col] <- 1
-grid[input_row+2,input_col] <- 1
-grid[input_row+1,input_col-1] <- 1
+
+
+
+
+
+
 
 
 
@@ -102,4 +109,4 @@ gganimate_recording <- ggplot(df, aes(x, y, fill = factor(value))) +
   theme(legend.position = 'none') +
   transition_states(as.numeric(df$time), transition_length = 0)
 
-animate(gganimate_recording, nframes = 33, renderer = gifski_renderer("./animations/test4.gif"))
+animate(gganimate_recording, nframes = 33, renderer = gifski_renderer("./animations/test5.gif"))
