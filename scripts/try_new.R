@@ -27,7 +27,7 @@ result_list <- c()
 
 capture_index <- NULL
 
-for(cycle in 1:144){
+for(cycle in 1:72){
 
 for(row in 1:nrow(grid)){
   
@@ -62,7 +62,8 @@ for(row in 1:nrow(grid)){
 
 capture_index[is.na(capture_index)] <- 0
 
-process <- capture_index %>% mutate(is_alive = current_state == 1) %>%
+process <- capture_index %>% 
+  mutate(is_alive = current_state == 1) %>%
   mutate(living_survive = ifelse(is_alive == TRUE & neighbor_sum %in% c(2,3),
                                  'STAY ALIVE','NOTHING')) %>%
   mutate(dead_born = ifelse(is_alive == FALSE & neighbor_sum ==3,
@@ -73,11 +74,10 @@ process$dead_born[is.na(process$dead_born)] <- 'NOTHING'
 
 #Next Steps
 process <- process %>% mutate(next_state = 
-                ifelse(is_alive == FALSE & dead_born ==  'BE BORN',
-                       1,
-                ifelse(is_alive == TRUE & living_survive == 'STAY ALIVE',
-                       1,0)))
-        
+                          ifelse(living_survive == 'STAY ALIVE',1,
+                          ifelse(dead_born == 'BE BORN',1,0)))
+                          
+                                
 for(i in 1:nrow(process)){
   
   grid[process[i,'row'],process[i,'col']] <- process[i,'next_state']
@@ -104,4 +104,4 @@ gganimate_recording <- ggplot(df, aes(x, y, fill = factor(value))) +
   theme(legend.position = 'none') +
   transition_states(as.numeric(df$time), transition_length = 0)
 
-animate(gganimate_recording, nframes = 33, renderer = gifski_renderer("./animations/big_r_pentomino.gif"))
+animate(gganimate_recording, nframes = 33, renderer = gifski_renderer("./animations/fix_pentamino.gif"))
