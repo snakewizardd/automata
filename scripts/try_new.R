@@ -27,7 +27,7 @@ result_list <- c()
 
 capture_index <- NULL
 
-for(cycle in 1:72){
+for(cycle in 1:144){
 
 for(row in 1:nrow(grid)){
   
