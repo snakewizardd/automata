@@ -10,12 +10,18 @@ colnames(grid) <- positions
 input_row <- 5
 input_col <- 6
 
-grid[input_row-1,input_col+2] <- 1
-grid[input_row-1,input_col+1] <- 1
+
+grid[input_row-1,input_col-2] <- 1
+
+grid[input_row-1,input_col-1] <- 1
+
 grid[input_row,input_col-1] <- 1
 grid[input_row,input_col] <- 1
-grid[input_row,input_col+1] <- 1
 grid[input_row+1,input_col] <- 1
+grid[input_row+1,input_col+1] <- 1
+
+
+
 
 
 
